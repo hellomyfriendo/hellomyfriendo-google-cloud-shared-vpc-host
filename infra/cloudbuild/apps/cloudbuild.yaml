@@ -1,0 +1,17 @@
+steps:
+  # apps
+  - name: "hashicorp/terraform"
+    id: terraform-apply-apps
+    dir: infra/terraform/apps
+    script: |
+      terraform init -backend-config=bucket=$TFSTATE_BUCKET
+
+      terraform apply --auto-approve
+    env:
+      - "TFSTATE_BUCKET=${_TFSTATE_BUCKET}"
+      - "TF_VAR_org_id=${_ORG_ID}"
+      - "TF_VAR_project_id=${PROJECT_ID}"
+      - "TF_VAR_region=${_REGION}"
+      - "TF_VAR_environment=${_ENVIRONMENT}"
+options:
+  logging: CLOUD_LOGGING_ONLY
