@@ -7,6 +7,7 @@ locals {
     "iam.googleapis.com",
     "orgpolicy.googleapis.com",
     "secretmanager.googleapis.com",
+    "servicenetworking.googleapis.com",
     "vpcaccess.googleapis.com"
   ]
 }

@@ -35,6 +35,14 @@ module "vpc" {
   ]
 }
 
+module "private_service_access" {
+  source        = "GoogleCloudPlatform/sql-db/google//modules/private_service_access"
+  version       = "~> 13.0"
+  project_id    = data.google_project.project.project_id
+  vpc_network   = module.vpc.network_name
+  prefix_length = 20
+}
+
 # TODO(Marcus): Raise these values when I can pay for it.
 resource "google_vpc_access_connector" "northamerica_northeast1" {
   name          = "na-ne-1-${var.environment}-vpc-con-1"
